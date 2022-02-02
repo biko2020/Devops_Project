@@ -9,6 +9,6 @@ import org.openlab.openlapcustomerservice.entities.Customer;
 public interface CustomerMapper {
 
     CustomerResponseDTO customerToCustomerResponseDTO(Customer customer);
-    Customer customerResponseDTOCustomer(CustomerRequestDTO customerRequestDTO);
+    Customer customerRequestDTOCustomer(CustomerRequestDTO customerRequestDTO);
 
 }

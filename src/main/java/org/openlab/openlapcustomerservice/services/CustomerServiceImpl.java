@@ -3,37 +3,51 @@ package org.openlab.openlapcustomerservice.services;
 import org.openlab.openlapcustomerservice.dto.CustomerRequestDTO;
 import org.openlab.openlapcustomerservice.dto.CustomerResponseDTO;
 import org.openlab.openlapcustomerservice.entities.Customer;
+import org.openlab.openlapcustomerservice.mappers.CustomerMapper;
 import org.openlab.openlapcustomerservice.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
+    private CustomerMapper customerMapper;
 
-    public  CustomerServiceImpl(CustomerRepository customerRepository){
+    public  CustomerServiceImpl(CustomerRepository customerRepository, CustomerMapper customerMapper){
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
     @Override
     public CustomerResponseDTO save(CustomerRequestDTO customerRequestDTO) {
-
-        return null;
+         Customer customer = customerMapper.customerRequestDTOCustomer(customerRequestDTO);
+         Customer saveCustomer = CustomerRepository.save(customer);
+         CustomerResponseDTO customerResponseDTO = customerMapper.customerToCustomerResponseDTO(saveCustomer);
+        return customerResponseDTO;
     }
 
     @Override
     public CustomerResponseDTO getCustomer(String id) {
-        return null;
+        Customer customer = customerRepository.findById(id).get();
+         return customerMapper.customerToCustomerResponseDTO(customer);
     }
 
     @Override
     public CustomerResponseDTO update(CustomerRequestDTO customerRequestDTO) {
-        return null;
+        Customer customer = customerMapper.customerRequestDTOCustomer(customerRequestDTO);
+        Customer updateCustomer = customerRepository.save(customer);
+        return customerMapper.customerToCustomerResponseDTO(updateCustomer);
     }
 
     @Override
     public List<CustomerResponseDTO> listCustomers() {
-        return null;
+        List<Customer> customers = customerRepository.findAll();
+        List<CustomerResponseDTO> customerResponseDTOS = customers.stream()
+                .map(cust->customerMapper.customerToCustomerResponseDTO(cust))
+                .collect(Collectors.toList());
+        return customerResponseDTOS;
     }
 }
