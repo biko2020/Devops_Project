@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+ # --- installation de serveur jenkins --
+ 
+Vagrant.configure("2") do |config|
+  # jenkins server
+  config.vm.define "jenkins-pipeline" do |jenkins|
+    jenkins.vm.box = "debian/buster64"
+    jenkins.vm.hostname = "jenkins-pipeline"
+    jenkins.vm.box_url = "debian/buster64"
+    jenkins.vm.network :private_network, ip: "192.168.0.100"
+    jenkins.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 3072]
+      v.customize ["modifyvm", :id, "--name", "jenkins-pipeline"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
+
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+      service ssh restart
+    SHELL
+    ensetsrvbd.vm.provision "shell", path: "install_jenkins.sh"
+  end
+  
+end
+
