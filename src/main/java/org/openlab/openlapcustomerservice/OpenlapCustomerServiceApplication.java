@@ -17,7 +17,8 @@ public class OpenlapCustomerServiceApplication {
     @Bean
    CommandLineRunner start(CustomerService customerService){
         return args -> {
-            customerService.save(new CustomerRequestDTO());
+            customerService.save(new CustomerRequestDTO("C01","Adria","adria@adria.com"));
+            customerService.save(new CustomerRequestDTO("C02","Dell","dell@dell.com"));
         };
    }
 }
