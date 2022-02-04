@@ -17,14 +17,17 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
         </processorPath>
         <module name="OpenlapCustomerService" />
+        <module name="Devops_Project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Devops_Project" target="1.8" />
       <module name="OpenlapCustomerService" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Devops_Project" options="-parameters" />
       <module name="OpenlapCustomerService" options="-parameters" />
     </option>
   </component>

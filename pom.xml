@@ -117,6 +117,9 @@
 
             <!-- ************* ******* fin add plugin  ********* *************-->
         </plugins>
+
+        <finalName>Devops_Project</finalName>
+
     </build>
 
 </project>
