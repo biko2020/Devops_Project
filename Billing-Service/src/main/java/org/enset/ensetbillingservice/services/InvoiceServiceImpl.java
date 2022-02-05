@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.Transient;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -35,6 +36,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         Invoice invoice = invoiceMapper.fromInvoiceRequestDTO((invoiceRequestDTO));
         invoice.setId(UUID.randomUUID().toString());
+        invoice.setDate(new Date());
+
         Invoice saveInvoice = invoiceRepository.save(invoice);
         return invoiceMapper.fromInvoice(saveInvoice);
 

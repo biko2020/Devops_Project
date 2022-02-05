@@ -18,13 +18,14 @@ import java.util.Date;
 public class Invoice {
    // declaré les proprietes de notre entite
  @Id
-    private String id;
+    private String id ;
     private Date date;
     private BigDecimal amount;
     private String customerId;
 
   
    @Transient
+
     //l'objet cusstomer  pour recuperer les donnees customer
     private  Customer customer;
 
