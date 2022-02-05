@@ -1,12 +1,11 @@
 package org.enset.ensetbillingservice.web;
 
+import org.enset.ensetbillingservice.dto.InvoiceRequestDTO;
 import org.enset.ensetbillingservice.dto.InvoiceResponseDTO;
 import org.enset.ensetbillingservice.services.InvoiceService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController
@@ -27,5 +26,11 @@ public class InvoiceRestController {
     @GetMapping(path = "/invoices/{customerId}")
     public List<InvoiceResponseDTO> getInvoiceByCustomer(@PathVariable String customerId){
         return invoiceService.invoiceByCustomerId(customerId);
+    }
+
+    @PostMapping(path = "/invoices")
+    public InvoiceResponseDTO save(@RequestBody InvoiceRequestDTO invoiceRequestDTO){
+        return invoiceService.save(invoiceRequestDTO);
+
     }
 }
