@@ -21,9 +21,10 @@ public class Invoice {
     private String id;
     private Date date;
     private BigDecimal amount;
-    private String clientId;
+    private String customerId;
 
-    @Transient
+  
+   @Transient
     //l'objet cusstomer  pour recuperer les donnees customer
     private  Customer customer;
 
