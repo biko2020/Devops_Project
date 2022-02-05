@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class Customer {
 
-// les proprietes de la class Customer
+// les parametres de la class Customer
     private String id;
     private String name;
     private  String email;
