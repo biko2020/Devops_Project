@@ -13,7 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    stragegy:
+    maxtix:
+    os: [ubuntu-latest, windows-laste, macOS-laste]
+  
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -24,3 +27,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+  publish:
+   needs: build
