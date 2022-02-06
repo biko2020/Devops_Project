@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     stragegy:
     maxtix:
     os: [ubuntu-latest, windows-laste, macOS-laste]
